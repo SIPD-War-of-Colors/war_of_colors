@@ -5,10 +5,13 @@ import { MetaMaskSVG } from "@/components/ui/metaMaskSVG";
 import { metaMaskSignInAction } from "@/lib/auth/metaMaskSignInAction";
 import { useState, useEffect } from "react";
 
-const MetaMaskSignIn = () => {
+interface MetaMaskSignInProps {
+  setWalletConnected: (connected: boolean) => void;
+}
+
+const MetaMaskSignIn: React.FC<MetaMaskSignInProps> = ({ setWalletConnected }) => {
   const [isConnecting, setIsConnecting] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
   useEffect(() => {
     const checkIfWalletIsConnected = async () => {
       if (typeof window !== "undefined" && window.ethereum) {
@@ -54,7 +57,7 @@ const MetaMaskSignIn = () => {
 
       const address = accounts[0];
       console.log("Connected address:", address);
-
+      setWalletConnected(true)
       // Now call the server action with the wallet address
       await metaMaskSignInAction(address);
     } catch (error) {

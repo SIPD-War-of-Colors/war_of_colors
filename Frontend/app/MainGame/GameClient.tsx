@@ -51,7 +51,7 @@ export default function GameClient(props: {
           test global state
         </Button> */}
         <Button className="w-full" variant="outline" onClick={handleSignOut}>
-          Sign Out
+          Connect Wallet
         </Button>
       </div>
       <PhaserGame ref={phaserRef} />
